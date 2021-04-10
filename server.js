@@ -1,6 +1,9 @@
 const express = require("express");
+const { config } = require("./config");
+const db = require("./db");
 
 const router = require("./network/routes");
+db(config.dbUrl);
 const app = express();
 
 app.use(express.json());
@@ -9,6 +12,6 @@ router(app);
 
 app.use("/app", express.static("public"));
 
-app.listen(3004);
+app.listen(config.port);
 
-console.log("http://localhost:3004");
+console.log(`http://localhost:${config.port}`);
